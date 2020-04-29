@@ -12,7 +12,7 @@ int main(int argc, const char** argv) {
   CFURLRef path = (__bridge CFURLRef)url;
 
   SecStaticCodeRef codeRef;
-  auto status = SecStaticCodeCreateWithPath(path, kSecCSDefaultFlags, &codeRef);
+  OSStatus status = SecStaticCodeCreateWithPath(path, kSecCSDefaultFlags, &codeRef);
   printf("SecStaticCodeCreateWithPath status: %d\n", status);
 
   SecCSFlags flags = kSecCSInternalInformation | kSecCSSigningInformation | kSecCSRequirementInformation | kSecCSInternalInformation;
@@ -31,7 +31,7 @@ int main(int argc, const char** argv) {
   CFShow(CFDictionaryGetValue(api, kSecCodeInfoFormat));
 
   CFArrayRef certChain = (CFArrayRef)CFDictionaryGetValue(api, kSecCodeInfoCertificates);
-  SecCertificateRef cert = SecCertificateRef(CFArrayGetValueAtIndex(certChain, 0));
+  SecCertificateRef cert = (SecCertificateRef)CFArrayGetValueAtIndex(certChain, 0);
   CFShow(cert);
 
   CFShow(SecCertificateCopySubjectSummary(cert));
