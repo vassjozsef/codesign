@@ -6,7 +6,7 @@ Sample code to check signature of OSX application.
 Build
 -----
 
-    clang -std=c11 -framework Foundation -framework Security codesign.m
+    clang -std=c11 -framework CoreFoundation -framework Security codesign.m
 
 Resources
 ---------

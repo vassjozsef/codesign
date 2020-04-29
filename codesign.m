@@ -1,5 +1,3 @@
-#include <Foundation/Foundation.h>
-#include <CoreFoundation/CoreFoundation.h>
 #include <Security/Security.h>
 
 static void printKeys(const void* key, const void* value, void* context) {
@@ -8,8 +6,8 @@ static void printKeys(const void* key, const void* value, void* context) {
 
 int main(int argc, const char** argv) {
 
-  NSURL* url = [NSURL URLWithString:@"/Applications/Discord.app"];
-  CFURLRef path = (__bridge CFURLRef)url;
+  CFStringRef str = CFStringCreateWithCString(kCFAllocatorDefault, "/Applications/Discord.app", kCFStringEncodingMacRoman);
+  CFURLRef path = CFURLCreateWithString(kCFAllocatorDefault, str, NULL);
 
   SecStaticCodeRef codeRef;
   OSStatus status = SecStaticCodeCreateWithPath(path, kSecCSDefaultFlags, &codeRef);
